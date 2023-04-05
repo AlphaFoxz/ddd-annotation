@@ -1,0 +1,25 @@
+buildscript {
+    ext {
+        springBootVersion = '3.0.5'
+        springDependencyVersion = '1.1.0'
+    }
+}
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version "${springBootVersion}"
+    id 'io.spring.dependency-management' version "${springDependencyVersion}"
+}
+apply plugin: 'java'
+apply plugin: 'io.spring.dependency-management'
+group = 'gitee.com.ericfox.ddd-annotation'
+version = "0.1.0"
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.google.auto.service:auto-service:1.0.1'
+    annotationProcessor 'com.google.auto.service:auto-service:1.0.1'
+}

@@ -19,8 +19,19 @@ repositories {
     mavenCentral()
 }
 
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
+    }
+}
+
 dependencies {
     implementation 'com.google.auto.service:auto-service:1.0.1'
     implementation 'com.squareup:javapoet:1.13.0'
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
     annotationProcessor 'com.google.auto.service:auto-service:1.0.1'
 }

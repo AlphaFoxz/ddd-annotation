@@ -19,14 +19,35 @@ repositories {
     mavenCentral()
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
-}
+//tasks.named('test') {
+//    useJUnitPlatform()
+//}
 
 dependencyManagement {
     imports {
         mavenBom org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES
     }
+}
+
+bootJar {
+    enabled = false
+}
+jar {
+    enabled = true
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+    options.release = 17
+    options.compilerArgs.addAll([
+            "-Xlint:unchecked",
+            "-Xlint:deprecation",
+            "-Xlint:-options",
+            "-parameters",
+            "-s",
+            "$buildDir/generated/sources/annotationProcessor"
+    ])
+    options.annotationProcessorPath += configurations.annotationProcessor
 }
 
 dependencies {

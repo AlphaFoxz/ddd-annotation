@@ -19,9 +19,9 @@ repositories {
     mavenCentral()
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
-}
+//tasks.named('test') {
+//    useJUnitPlatform()
+//}
 
 dependencyManagement {
     imports {

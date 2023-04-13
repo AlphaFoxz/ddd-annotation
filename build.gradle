@@ -29,6 +29,27 @@ dependencyManagement {
     }
 }
 
+bootJar {
+    enabled = false
+}
+jar {
+    enabled = true
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+    options.release = 17
+    options.compilerArgs.addAll([
+            "-Xlint:unchecked",
+            "-Xlint:deprecation",
+            "-Xlint:-options",
+            "-parameters",
+            "-s",
+            "$buildDir/generated/sources/annotationProcessor"
+    ])
+    options.annotationProcessorPath += configurations.annotationProcessor
+}
+
 dependencies {
     implementation 'com.google.auto.service:auto-service:1.0.1'
     implementation 'com.squareup:javapoet:1.13.0'

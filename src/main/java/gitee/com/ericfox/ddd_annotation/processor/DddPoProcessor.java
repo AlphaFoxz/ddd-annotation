@@ -15,13 +15,24 @@ import javax.tools.Diagnostic;
 import java.io.IOException;
 import java.util.Set;
 
-/**
- * Getter代码生成实现类
- */
 @AutoService(Processor.class)
 @SupportedSourceVersion(SourceVersion.RELEASE_17)
 @SupportedAnnotationTypes("gitee.com.ericfox.ddd_annotation.DddPo")
 public class DddPoProcessor extends AbstractProcessor {
+    private Messager messager;
+
+    public DddPoProcessor() {
+        System.out.println("打包执行");
+    }
+
+    @Override
+    public synchronized void init(ProcessingEnvironment processingEnv) {
+        super.init(processingEnv);
+        this.messager = processingEnv.getMessager();
+        messager.printMessage(Diagnostic.Kind.ERROR, "测试输出====DddPoProcessor init");
+        System.out.println("测试输出====DddPoProcessor init");
+    }
+
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
         for (Element element : roundEnv.getElementsAnnotatedWith(DddPo.class)) {
